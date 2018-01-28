@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="com.qbao.ai.web:war">
+    <output-path>$PROJECT_DIR$/com.qbao.ai.web/target</output-path>
+    <root id="archive" name="com.qbao.ai.web.war">
+      <element id="artifact" artifact-name="com.qbao.ai.web:war exploded" />
+    </root>
+  </artifact>
+</component>

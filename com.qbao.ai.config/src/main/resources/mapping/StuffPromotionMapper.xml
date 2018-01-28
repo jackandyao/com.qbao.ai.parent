@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qbao.ai.resposity.mybatis.dao.StuffPromotionDao">
+    <resultMap type="StuffPromotion" id="StuffPromotionMap">
+        <result column="id" property="id"/>
+        <result column="real_stuff_id" property="realStuffId"/>
+        <result column="name" property="name"/>
+        <result column="reserve_price" property="reservePrice"/>
+        <result column="final_price" property="finalPrice"/>
+        <result column="rebate_id" property="rebateId"/>
+        <result column="url" property="url"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="cat_id" property="catId"/>
+        <result column="status" property="status"/>
+        <result column="source" property="source"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="click_num" property="clickNum"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="ios_promotion_url" property="iosPromotionUrl"/>
+        <result column="android_promotion_url" property="androidPromotionUrl"/>
+        <result column="rebate_value" property="rebateValue"/>
+        <result column="stuff_id" property="stuffId"/>
+        <result column="is_absolute" property="isAbsolute" />
+        <result column="promotion_rate" property="promotionRate"/>
+    </resultMap>
+    <select id="findStuffPromotionByIdsAndPage" resultMap="StuffPromotionMap">
+        select * from stuff_promotion where status=1 and id in
+        <foreach collection="ids" index="index" item="idItem" open="(" close=")" separator=",">
+            #{idItem}
+        </foreach>
+         limit  #{page},#{size}
+    </select>
+
+    <select id="findStuffPromotionByIds" resultMap="StuffPromotionMap">
+        select id from stuff_promotion where status=1 and id in
+        <foreach collection="ids" index="index" item="idItem" open="(" close=")" separator=",">
+            #{idItem}
+        </foreach>
+    </select>
+    <select id="findStuffPromotionByIdsList"  resultMap="StuffPromotionMap">
+        select * from stuff_promotion where status=1 and id in
+        <foreach collection="ids" index="index" item="idItem" open="(" close=")" separator=",">
+            #{idItem}
+        </foreach>
+    </select>
+</mapper>

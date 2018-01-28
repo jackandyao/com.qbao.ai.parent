@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qbao.ai.resposity.mybatis.dao.QuestionDirDao">
+    <resultMap type="QuestionDir" id="QuestionDirMap">
+        <result column="id" property="id" />
+        <result column="dir_id" property="dirId" />
+        <result column="dir_name" property="dirName" />
+        <result column="lev" property="lev" />
+        <result column="pid" property="pid" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+	
+</mapper>

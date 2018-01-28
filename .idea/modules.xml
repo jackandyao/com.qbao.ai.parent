@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.common/com.qbao.ai.common.iml" filepath="$PROJECT_DIR$/com.qbao.ai.common/com.qbao.ai.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.config/com.qbao.ai.config.iml" filepath="$PROJECT_DIR$/com.qbao.ai.config/com.qbao.ai.config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.model/com.qbao.ai.model.iml" filepath="$PROJECT_DIR$/com.qbao.ai.model/com.qbao.ai.model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.parent.iml" filepath="$PROJECT_DIR$/com.qbao.ai.parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.parse/com.qbao.ai.parse.iml" filepath="$PROJECT_DIR$/com.qbao.ai.parse/com.qbao.ai.parse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.resposity/com.qbao.ai.resposity.iml" filepath="$PROJECT_DIR$/com.qbao.ai.resposity/com.qbao.ai.resposity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.rest/com.qbao.ai.rest.iml" filepath="$PROJECT_DIR$/com.qbao.ai.rest/com.qbao.ai.rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.service/com.qbao.ai.service.iml" filepath="$PROJECT_DIR$/com.qbao.ai.service/com.qbao.ai.service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.util/com.qbao.ai.util.iml" filepath="$PROJECT_DIR$/com.qbao.ai.util/com.qbao.ai.util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.qbao.ai.web/com.qbao.ai.web.iml" filepath="$PROJECT_DIR$/com.qbao.ai.web/com.qbao.ai.web.iml" />
+    </modules>
+  </component>
+</project>

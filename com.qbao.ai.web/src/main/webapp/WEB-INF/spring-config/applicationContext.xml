@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!-- 默认的注解映射的支持 -->
+    <mvc:annotation-driven>
+        <!-- 处理responseBody 里面日期类型 -->
+        <mvc:message-converters>
+
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+<!--     <mvc:interceptors>
+            <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor"/>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <mvc:exclude-mapping path="/showSignUser/users.do"/>
+              &lt;!&ndash;  &lt;!&ndash;&ndash;&lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;&ndash&ndash;&gt;&ndash;&gt;
+                <bean class="com.qbao.ai.web.filter.LogInterceptor"/>
+            </mvc:interceptor>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <bean class="com.qbao.ai.web.filter.RequestInterceptor"/>
+            </mvc:interceptor>
+     </mvc:interceptors>-->
+
+
+    <bean id="controllerMethodInterceptor" class="com.qbao.filter.ControllerMethodInterceptor"/>
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="controllerMethodPointcut"
+                      expression="execution(* com.qbao.controller..*(..)) and @annotation(org.springframework.web.bind.annotation.RequestMapping) "/>
+        <aop:advisor advice-ref="controllerMethodInterceptor" pointcut-ref="controllerMethodPointcut"/>
+    </aop:config>
+
+    <!-- 把标记了@Controller注解的类转换为bean -->
+    <context:component-scan base-package="com.qbao.controller"></context:component-scan>
+    <!-- 加载properties配置文件 -->
+    <!--<bean id="propertiesConfigLoader" class="com.tengrong.base.CustomizedPropertyConfigurer">-->
+    <!--<property name="locations">-->
+    <!--<list>-->
+    <!--<value>classpath:jdbc.properties</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 支持上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>1048576</value>
+        </property>
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+        <property name="resolveLazily">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <!-- 加载Service配置 -->
+     <import resource="classpath*:spring-context.xml"/>
+</beans>

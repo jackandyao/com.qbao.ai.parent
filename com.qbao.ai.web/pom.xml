@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.qbao.ai</groupId>
+        <artifactId>com.qbao.ai.parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <groupId>com.qbao.ai.web</groupId>
+    <artifactId>com.qbao.ai.web</artifactId>
+    <packaging>war</packaging>
+    <name>com.qbao.ai.web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <jackson.version>2.6.3</jackson.version>
+        <servlet.version>3.1.0</servlet.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.qbao.ai</groupId>
+            <artifactId>com.qbao.ai.service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>yuicompressor-maven-plugin</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.mobile</groupId>
+            <artifactId>spring-mobile-device</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qbao.ai</groupId>
+            <artifactId>com.qbao.ai.model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+
+    <build>
+
+
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <!--<excludes>-->
+                <!--<exclude>*.properties</exclude>-->
+                <!--<exclude>*.conf</exclude>-->
+                <!--</excludes>-->
+            </resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <!-- maven插件配置 -->
+        <plugins>
+            <!-- <plugin>
+                 &lt;!&ndash; YUI Compressor Maven压缩插件 &ndash;&gt;
+                 <groupId>net.alchim31.maven</groupId>
+                 <artifactId>yuicompressor-maven-plugin</artifactId>
+                 <version>1.5.1</version>
+                 <executions>
+                     <execution>
+                         <phase>process-resources</phase>
+                         <goals>
+                             <goal>compress</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+
+                 <configuration>
+                     &lt;!&ndash; 读取js,css文件采用UTF-8编码 &ndash;&gt;
+                     <encoding>UTF-8</encoding>
+                     &lt;!&ndash; 不显示js可能的错误 &ndash;&gt;
+                     <jswarn>false</jswarn>
+                     &lt;!&ndash; 若存在已压缩的文件，会先对比源文件是否有改动。有改动便压缩，无改动就不压缩 &ndash;&gt;
+                     <force>false</force>
+                     &lt;!&ndash; 在指定的列号后插入新行 &ndash;&gt;
+                     <linebreakpos>-1</linebreakpos>
+                     &lt;!&ndash; 压缩之前先执行聚合文件操作 &ndash;&gt;
+                     <preProcessAggregates>true</preProcessAggregates>
+                     &lt;!&ndash; 压缩后保存文件后缀 &ndash;&gt;
+                     <suffix>.min</suffix>
+                     &lt;!&ndash; 源目录，即需压缩的根目录 &ndash;&gt;
+                     <sourceDirectory>${basedir}/src/main/webapp/pages/helper/</sourceDirectory>
+                     &lt;!&ndash; 压缩js和css文件 &ndash;&gt;
+                     <includes>
+                         <include>**/*.js</include>
+                         <include>**/*.css</include>
+                     </includes>
+                     &lt;!&ndash; 以下目录和文件不会被压缩 &ndash;&gt;
+                     <excludes>
+                         <exclude>**/*.min.js</exclude>
+                         <exclude>**/*.min.css</exclude>
+                         <exclude>**/*.-min.js</exclude>
+                         <exclude>**/*.-min.css</exclude>
+                     </excludes>
+                     &lt;!&ndash; 压缩后输出文件目录 &ndash;&gt;
+                     <outputDirectory>${basedir}/target/</outputDirectory>
+                 </configuration>
+             </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+
+                </configuration>
+            </plugin>
+
+
+
+			
+			<!-- jetty插件, 设定context path与spring profile -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.6.10.v20130312</version>
+				<configuration>
+					<systemProperties>
+						<systemProperty>
+							<name>org.apache.jasper.compiler.disablejsr199</name>
+							<value>true</value>
+						</systemProperty>
+					</systemProperties>
+					<useTestClasspath>true</useTestClasspath>
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+					</webAppConfig>
+				 
+				</configuration>
+			</plugin>
+			
+        </plugins>
+
+        <finalName>com.qbao.ai.web</finalName>
+    </build>
+</project>
+
